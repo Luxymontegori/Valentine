@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Chance</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            color: white;
+        }
+
+        .video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .box {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 20px;
+            color: red;
+        }
+
+        .buttons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button {
+            width: 100px;
+            height: 40px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #wellClickThis {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: red;
+            z-index: 100;
+        }
+
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            color: white;
+            z-index: 200;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .intro-overlay button {
+            margin-top: 15px;
+            background: red;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="intro-overlay" id="introOverlay">
+        <p>Before you continue... can you truly hear the echoes of what was left unsaid?</p>
+        <button onclick="startExperience()">Continue</button>
+    </div>
+
+    <audio id="backgroundMusic" loop>
+        <source src="sad.mp3" type="audio/mp3">
+    </audio>
+    
+    <video class="video" autoplay loop muted playsinline>
+        <source src="Let me play you a sad Song on the World's smallest Violin - phontomen 1 (480p, h264).mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <div class="box">
+        <h1 id="finalText">This is your final chance</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="goToYesPage()">Yes</button>
+            <button id="noBtn" onclick="handleNoClick()">No</button>
+        </div>
+        <div id="wellClickThis">
+            <button onclick="showMessage()">Click me</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay">Guess what? Your 'no' just turned into a 'yes'—you're still my Valentine</div>
+
+    <script>
+function startExperience() {
+    document.getElementById('introOverlay').style.display = 'none';
+    let audio = document.getElementById('backgroundMusic');
+    audio.muted = false;
+    audio.play().catch(error => console.log("Autoplay failed: ", error));
+}
+
+function goToYesPage() {
+    window.location.href = 'thankyou.html';
+}
+
+function handleNoClick() {
+    document.getElementById('yesBtn').style.display = 'none';
+    document.getElementById('noBtn').style.display = 'none';
+    document.getElementById('finalText').innerText = "No matter what you choose, the answer was always the same.";
+    document.getElementById('wellClickThis').style.display = 'block';
+}
+
+function showMessage() {
+    let overlay = document.getElementById('overlay');
+    overlay.style.display = 'flex';
+    setTimeout(() => {
+        window.location.href = 'thankyou.html';
+    }, 5000);
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You!</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('bg.jpg') no-repeat center center/cover;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .video {
+            width: 90%; /* Menyesuaikan dengan layar HP */
+            max-width: 250px; 
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .box {
+            background: rgba(255, 240, 245, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 182, 193, 0.7);
+            width: 80%; /* Agar responsif */
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #ff1493;
+            font-size: 22px;
+            font-family: 'cursive';
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 8px #ff1493; }
+            100% { text-shadow: 0 0 15px #ff66b2; }
+        }
+
+        #playButton {
+            font-size: 25px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            animation: bounce 1.5s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 30px; /* Lebih kecil untuk HP */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 1;
+            animation: riseUp 4s linear forwards;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        @keyframes riseUp {
+            0% { transform: translateY(100vh) scale(0.8); opacity: 1; }
+            70% { transform: translateY(25vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px;
+            }
+            .box {
+                width: 90%;
+                padding: 15px;
+            }
+            #playButton {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video class="video" autoplay loop muted>
+        <source src="thankyou.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <div class="box">
+        <h1>Thank You for Saying Yes! ❤️</h1>
+        <p>Click the ❤️ to start the vibes!</p>
+        <button id="playButton">❤️</button>
+    </div>
+
+    <audio id="loveMusic" loop>
+        <source src="Laufey - Valentine  COVER.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerText = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        setInterval(createHeart, 800); // Interval lebih besar agar tidak terlalu banyak di layar HP
+
+        document.getElementById('playButton').addEventListener('click', function() {
+            document.getElementById('loveMusic').play();
+            this.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
